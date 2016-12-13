@@ -3,6 +3,7 @@ package de.simonsator.partyandfriends.broadcast;
 import de.simonsator.partyandfriends.api.friends.abstractcommands.FriendSubCommand;
 import de.simonsator.partyandfriends.api.pafplayers.OnlinePAFPlayer;
 import de.simonsator.partyandfriends.api.pafplayers.PAFPlayer;
+import de.simonsator.partyandfriends.friends.commands.Friends;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.config.Configuration;
 
@@ -24,12 +25,12 @@ public class BroadcastCommand extends FriendSubCommand {
 	@Override
 	public void onCommand(OnlinePAFPlayer pPlayer, String[] args) {
 		if (args.length < 2) {
-			sendError(pPlayer, new TextComponent(MESSAGES.getString("Messages.NoMessage")));
+			sendError(pPlayer, new TextComponent(Friends.getInstance().getPrefix() + MESSAGES.getString("Messages.NoMessage")));
 			return;
 		}
 		List<PAFPlayer> friends = pPlayer.getFriends();
 		if (friends.isEmpty()) {
-			sendError(pPlayer, new TextComponent(MESSAGES.getString("Messages.NoFriends")));
+			sendError(pPlayer, new TextComponent(Friends.getInstance().getPrefix() + MESSAGES.getString("Messages.NoFriends")));
 			return;
 		}
 		StringBuilder builder = new StringBuilder();
