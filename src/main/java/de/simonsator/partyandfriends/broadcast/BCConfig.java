@@ -22,9 +22,13 @@ public class BCConfig extends ConfigurationCreator {
 	private void loadDefaultValues() {
 		set("Names", "broadcast", "bc");
 		set("Priority", 100);
+		set("CoolDown.Activated", false);
+		set("CoolDown.Time", 10);
+		set("CoolDown.ByPassPermission", "partyandfriends.broadcast.bypasscooldown");
 		set("Messages.Help", "&8/&5friend broadcast &8- &7Sends a message to all your friends");
 		set("Messages.NoMessage", " &7you need to provide a message.");
 		set("Messages.NoFriends", " &7Until now you do not have any friends.");
+		set("Messages.CoolDownActive", " &7At the moment a cooldown is active. You can only Broadcast every 10 seconds.");
 		set("Messages.Output", "&8[&5&lFriend-Broadcast&8] &e[PLAYER]&7:[MESSAGE]");
 		set("Messages.Splitter", " &7");
 	}
