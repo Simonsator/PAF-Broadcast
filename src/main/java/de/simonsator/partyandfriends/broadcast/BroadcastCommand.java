@@ -8,9 +8,7 @@ import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.config.Configuration;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
@@ -20,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class BroadcastCommand extends FriendSubCommand {
 	private final Configuration MESSAGES;
-	private List<UUID> uuidList = null;
+	private Set<UUID> uuidList = null;
 	private final int TIME;
 	private final BCMain PLUGIN;
 
@@ -29,7 +27,7 @@ public class BroadcastCommand extends FriendSubCommand {
 		PLUGIN = pPlugin;
 		MESSAGES = pConfig;
 		if (pConfig.getBoolean("CoolDown.Activated"))
-			uuidList = new LinkedList<>();
+			uuidList = new HashSet<>();
 		TIME = pConfig.getInt("CoolDown.Time");
 	}
 
