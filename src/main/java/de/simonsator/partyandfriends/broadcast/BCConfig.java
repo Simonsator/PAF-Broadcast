@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * @author simonbrungs
+ * @author Simonsator
  * @version 1.0.0 13.12.16
  */
 public class BCConfig extends ConfigurationCreator {

@@ -3,13 +3,12 @@ package de.simonsator.partyandfriends.broadcast;
 import de.simonsator.partyandfriends.api.PAFExtension;
 import de.simonsator.partyandfriends.friends.commands.Friends;
 import de.simonsator.partyandfriends.main.Main;
-import net.md_5.bungee.api.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
 
 /**
- * @author simonbrungs
+ * @author Simonsator
  * @version 1.0.0 13.12.16
  */
 public class BCMain extends PAFExtension {
