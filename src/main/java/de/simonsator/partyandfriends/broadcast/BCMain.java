@@ -2,6 +2,7 @@ package de.simonsator.partyandfriends.broadcast;
 
 import de.simonsator.partyandfriends.api.PAFExtension;
 import de.simonsator.partyandfriends.friends.commands.Friends;
+import de.simonsator.partyandfriends.main.Main;
 import net.md_5.bungee.api.plugin.Plugin;
 
 import java.io.File;
@@ -23,6 +24,7 @@ public class BCMain extends PAFExtension {
 		}
 		Friends.getInstance().addCommand(new BroadcastCommand(config.getCreatedConfiguration().getStringList("Names").toArray(new String[0]),
 				config.getCreatedConfiguration().getInt("Priority"), config.getCreatedConfiguration().getString("Messages.Help"), config.getCreatedConfiguration(), this));
+		Main.getInstance().registerExtension(this);
 	}
 
 	@Override
