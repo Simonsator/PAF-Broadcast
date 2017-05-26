@@ -6,7 +6,7 @@
 
 	<groupId>de.simonsator</groupId>
 	<artifactId>PAF-Broadcast</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.3-SNAPSHOT</version>
 	<build>
 		<plugins>
 			<plugin>
@@ -40,7 +40,7 @@
 		<dependency>
 			<groupId>de.simonsator</groupId>
 			<artifactId>BungeecordPartyAndFriends</artifactId>
-			<version>1.0.53</version>
+			<version>1.0.60</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

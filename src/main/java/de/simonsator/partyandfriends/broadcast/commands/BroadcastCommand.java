@@ -1,14 +1,18 @@
-package de.simonsator.partyandfriends.broadcast;
+package de.simonsator.partyandfriends.broadcast.commands;
 
 import de.simonsator.partyandfriends.api.friends.abstractcommands.FriendSubCommand;
 import de.simonsator.partyandfriends.api.pafplayers.OnlinePAFPlayer;
 import de.simonsator.partyandfriends.api.pafplayers.PAFPlayer;
+import de.simonsator.partyandfriends.broadcast.BCMain;
 import de.simonsator.partyandfriends.friends.commands.Friends;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.config.Configuration;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 
@@ -63,7 +67,8 @@ public class BroadcastCommand extends FriendSubCommand {
 		String message = MESSAGES.getString("Messages.Output").
 				replace("[MESSAGE]", builder.toString()).replace("[PLAYER]", pPlayer.getDisplayName());
 		for (PAFPlayer friend : friends)
-			friend.sendMessage(message);
+			if (friend.getSettingsWorth(30) == 0)
+				friend.sendMessage(message);
 		pPlayer.sendMessage(MESSAGES.getString("Messages.Output").
 				replace("[MESSAGE]", builder.toString()).replace("[PLAYER]", pPlayer.getDisplayName()));
 	}
