@@ -29,7 +29,8 @@ public class BCMain extends PAFExtension {
 				config.getCreatedConfiguration().getInt("Priority"), config.getCreatedConfiguration().getString("Messages.Help"), config.getCreatedConfiguration(), this));
 		Settings settingsCommand = (Settings) Friends.getInstance().getSubCommand(Settings.class);
 		if (settingsCommand != null)
-			settingsCommand.registerSetting(new ReceiveBroadcastSettings(config.getCreatedConfiguration().getStringList("Settings.Broadcast.Names"), config.getCreatedConfiguration().getString("Settings.Broadcast.Permission"), config.getCreatedConfiguration().getInt("Settings.Broadcast.Priority"), config.getCreatedConfiguration()));
+			if (config.getCreatedConfiguration().getBoolean("Settings.Broadcast.Enabled"))
+				settingsCommand.registerSetting(new ReceiveBroadcastSettings(config.getCreatedConfiguration().getStringList("Settings.Broadcast.Names"), config.getCreatedConfiguration().getString("Settings.Broadcast.Permission"), config.getCreatedConfiguration().getInt("Settings.Broadcast.Priority"), config.getCreatedConfiguration()));
 		Main.getInstance().registerExtension(this);
 	}
 
