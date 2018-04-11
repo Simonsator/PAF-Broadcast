@@ -39,8 +39,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>de.simonsator</groupId>
-			<artifactId>BungeecordPartyAndFriends</artifactId>
-			<version>1.0.60</version>
+			<artifactId>Party-and-Friends-For-Bungeecord-MySQL</artifactId>
+			<version>1.0.164</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -56,6 +56,24 @@
 			<version>1.11-SNAPSHOT</version>
 			<type>javadoc</type>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-api</artifactId>
+			<version>1.12.2-R0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<!--Bukkit API-->
+		<dependency>
+			<groupId>org.bukkit</groupId>
+			<artifactId>bukkit</artifactId>
+			<version>1.12.2-R0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.simonsator</groupId>
+			<artifactId>Party-and-Friends-GUI</artifactId>
+			<version>1.0.76</version>
 		</dependency>
 	</dependencies>
 

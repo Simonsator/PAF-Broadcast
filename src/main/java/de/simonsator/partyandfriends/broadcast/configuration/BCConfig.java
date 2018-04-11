@@ -1,5 +1,6 @@
 package de.simonsator.partyandfriends.broadcast.configuration;
 
+import de.simonsator.partyandfriends.broadcast.BCMain;
 import de.simonsator.partyandfriends.utilities.ConfigLoader;
 import de.simonsator.partyandfriends.utilities.ConfigurationCreator;
 
@@ -11,8 +12,8 @@ import java.io.IOException;
  * @version 1.0.0 13.12.16
  */
 public class BCConfig extends ConfigurationCreator {
-	public BCConfig(File file) throws IOException {
-		super(file);
+	public BCConfig(File file, BCMain plugin) throws IOException {
+		super(file, plugin);
 		readFile();
 		loadDefaultValues();
 		saveFile();

@@ -21,7 +21,7 @@ public class BCMain extends PAFExtension {
 	public void onEnable() {
 		BCConfig config = null;
 		try {
-			config = new BCConfig(new File(getConfigFolder(), "config.yml"));
+			config = new BCConfig(new File(getConfigFolder(), "config.yml"), this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

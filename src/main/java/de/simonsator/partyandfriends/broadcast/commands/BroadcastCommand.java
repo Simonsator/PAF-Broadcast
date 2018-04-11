@@ -22,9 +22,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class BroadcastCommand extends FriendSubCommand {
 	private final Configuration MESSAGES;
-	private Set<UUID> uuidList = null;
 	private final int TIME;
 	private final BCMain PLUGIN;
+	private Set<UUID> uuidList = null;
 
 	public BroadcastCommand(String[] pCommands, int pPriority, String pHelp, Configuration pConfig, BCMain pPlugin) {
 		super(pCommands, pPriority, pHelp);

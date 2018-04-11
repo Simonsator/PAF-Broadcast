@@ -15,7 +15,7 @@ public class ReceiveBroadcastSettings extends SimpleSetting {
 	private final Configuration CONFIG;
 
 	public ReceiveBroadcastSettings(List<String> pSettingNames, String pPermission, int pPriority, Configuration pConfiguration) {
-		super(pSettingNames, pPermission, pPriority);
+		super(pSettingNames, pPermission, pPriority, "receivebroadcast");
 		CONFIG = pConfiguration;
 	}
 

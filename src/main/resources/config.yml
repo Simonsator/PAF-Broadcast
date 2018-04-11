@@ -1,0 +1,12 @@
+Settings:
+  ReceiveBroadcastsSetting:
+    Use: true
+    TopItem:
+      ItemData: BOOK_AND_QUILL
+      MetaData: 0
+      Text: '&6Do you want to receive broadcast messages from friends?'
+    LowerItem:
+      ReceiveBroadcastsItem:
+        Text: '&aYou will receive broadcast messages from friends'
+      DoNotReceiveBroadcastsItem:
+        Text: '&cYou will not receive broadcast messages from friends'

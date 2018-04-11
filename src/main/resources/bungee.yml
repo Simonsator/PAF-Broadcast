@@ -1,6 +1,6 @@
 name: Broadcast-for-PAF
 version: ${project.version}
 author: Simonsator
-depends: [PartyAndFriendsGUI]
-main: de.simonsator.partyandfriends.broadcast.gui.BroadcastSettingPlugin
+depends: [PartyAndFriends]
+main: de.simonsator.partyandfriends.broadcast.BCMain
 description: An add-on for party and friends to add /friend broadcast
