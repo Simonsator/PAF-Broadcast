@@ -3,6 +3,7 @@ package de.simonsator.partyandfriends.broadcast;
 import de.simonsator.partyandfriends.api.PAFExtension;
 import de.simonsator.partyandfriends.broadcast.commands.BroadcastCommand;
 import de.simonsator.partyandfriends.broadcast.configuration.BCConfig;
+import de.simonsator.partyandfriends.broadcast.extended.AddBroadcastGUISetting;
 import de.simonsator.partyandfriends.broadcast.settings.ReceiveBroadcastSettings;
 import de.simonsator.partyandfriends.friends.commands.Friends;
 import de.simonsator.partyandfriends.friends.subcommands.Settings;
@@ -31,6 +32,11 @@ public class BCMain extends PAFExtension {
 		if (settingsCommand != null)
 			if (config.getCreatedConfiguration().getBoolean("Settings.Broadcast.Enabled"))
 				settingsCommand.registerSetting(new ReceiveBroadcastSettings(config.getCreatedConfiguration().getStringList("Settings.Broadcast.Names"), config.getCreatedConfiguration().getString("Settings.Broadcast.Permission"), config.getCreatedConfiguration().getInt("Settings.Broadcast.Priority"), config.getCreatedConfiguration()));
+		try {
+			Class.forName("de.simonsator.partyandfriends.api.events.communication.spigot.SendSettingsDataEvent");
+			getProxy().getPluginManager().registerListener(this, new AddBroadcastGUISetting());
+		} catch (ClassNotFoundException ignored) {
+		}
 		Main.getInstance().registerExtension(this);
 	}
 
