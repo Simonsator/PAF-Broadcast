@@ -10,6 +10,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class BroadcastSettingPlugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
+		getConfig().options().copyDefaults(true);
+		saveConfig();
 		if (getConfig().getBoolean("Settings.ReceiveBroadcastsSetting.Use")) {
 			ItemStack receiveItem = getGreenLoamStackWithName("Settings.ReceiveBroadcastsSetting.LowerItem.ReceiveBroadcastsItem.Text");
 			ItemStack doNotReceiveItem = getRedLoamStackWithName("Settings.ReceiveBroadcastsSetting.LowerItem.ReceiveBroadcastsItem.Text");
