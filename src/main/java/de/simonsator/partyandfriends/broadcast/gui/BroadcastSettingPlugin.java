@@ -2,6 +2,7 @@ package de.simonsator.partyandfriends.broadcast.gui;
 
 import de.simonsator.partyandfriendsgui.inventory.PAFClickManager;
 import de.simonsator.partyandfriendsgui.inventory.tasks.inventoryassignment.SettingsMenu;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -12,6 +13,9 @@ public class BroadcastSettingPlugin extends JavaPlugin {
 	public void onEnable() {
 		getConfig().options().copyDefaults(true);
 		saveConfig();
+		for (String path : getConfig().getKeys(true))
+			if (getConfig().isString(path))
+				getConfig().set(path, ChatColor.translateAlternateColorCodes('&', getConfig().getString(path)));
 		if (getConfig().getBoolean("Settings.ReceiveBroadcastsSetting.Use")) {
 			ItemStack receiveItem = getGreenLoamStackWithName("Settings.ReceiveBroadcastsSetting.LowerItem.ReceiveBroadcastsItem.Text");
 			ItemStack doNotReceiveItem = getRedLoamStackWithName("Settings.ReceiveBroadcastsSetting.LowerItem.ReceiveBroadcastsItem.Text");
