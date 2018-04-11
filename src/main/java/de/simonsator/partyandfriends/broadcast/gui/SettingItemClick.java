@@ -12,11 +12,11 @@ import org.bukkit.inventory.ItemStack;
  * @version 1.0.0 20.12.16
  */
 public class SettingItemClick extends InventoryTask {
-	private final ItemStack TOP_ITEM;
+	private final ItemStack DO_NOT_RECEIVE_ITEM;
 	private final ItemStack RECEIVE_ITEM;
 
-	public SettingItemClick(ItemStack TOP_ITEM, ItemStack pReceive) {
-		this.TOP_ITEM = TOP_ITEM;
+	public SettingItemClick(ItemStack pReceive, ItemStack pDoNotReceiveItem) {
+		this.DO_NOT_RECEIVE_ITEM = pDoNotReceiveItem;
 		this.RECEIVE_ITEM = pReceive;
 	}
 
@@ -26,12 +26,16 @@ public class SettingItemClick extends InventoryTask {
 		if (Main.getInstance().getConfig()
 				.getBoolean("SettingsInventory.CloseSettingsInventoryAutomatically"))
 			pEvent.getWhoClicked().closeInventory();
-		else
-			PartyFriendsAPI.openSettingsInventory((Player) pEvent.getWhoClicked());
+		else {
+			if (pEvent.getCurrentItem().equals(RECEIVE_ITEM))
+				pEvent.getClickedInventory().setItem(pEvent.getSlot(), DO_NOT_RECEIVE_ITEM);
+			else
+				pEvent.getClickedInventory().setItem(pEvent.getSlot(), RECEIVE_ITEM);
+		}
 	}
 
 	@Override
 	public boolean isApplicable(InventoryClickEvent pEvent) {
-		return pEvent.getCurrentItem().equals(TOP_ITEM) || pEvent.getCurrentItem().equals(RECEIVE_ITEM);
+		return pEvent.getCurrentItem().equals(DO_NOT_RECEIVE_ITEM) || pEvent.getCurrentItem().equals(RECEIVE_ITEM);
 	}
 }
