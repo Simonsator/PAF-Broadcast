@@ -4,10 +4,9 @@ import de.simonsator.partyandfriends.api.friends.abstractcommands.FriendSubComma
 import de.simonsator.partyandfriends.api.pafplayers.OnlinePAFPlayer;
 import de.simonsator.partyandfriends.api.pafplayers.PAFPlayer;
 import de.simonsator.partyandfriends.broadcast.BCMain;
-import de.simonsator.partyandfriends.friends.commands.Friends;
+import de.simonsator.partyandfriends.utilities.ConfigurationCreator;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.config.Configuration;
 
 import java.util.HashSet;
 import java.util.List;
@@ -21,13 +20,13 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0.0 13.12.16
  */
 public class BroadcastCommand extends FriendSubCommand {
-	private final Configuration MESSAGES;
+	private final ConfigurationCreator MESSAGES;
 	private final int TIME;
 	private final BCMain PLUGIN;
 	private Set<UUID> uuidList = null;
 
-	public BroadcastCommand(String[] pCommands, int pPriority, String pHelp, Configuration pConfig, BCMain pPlugin) {
-		super(pCommands, pPriority, pHelp);
+	public BroadcastCommand(List<String> pCommands, int pPriority, String pHelp, String pPermission, ConfigurationCreator pConfig, BCMain pPlugin) {
+		super(pCommands, pPriority, pHelp, pPermission);
 		PLUGIN = pPlugin;
 		MESSAGES = pConfig;
 		if (pConfig.getBoolean("CoolDown.Activated"))
@@ -38,17 +37,17 @@ public class BroadcastCommand extends FriendSubCommand {
 	@Override
 	public void onCommand(final OnlinePAFPlayer pPlayer, String[] args) {
 		if (args.length < 2) {
-			sendError(pPlayer, new TextComponent(Friends.getInstance().getPrefix() + MESSAGES.getString("Messages.NoMessage")));
+			sendError(pPlayer, new TextComponent(PREFIX + MESSAGES.getString("Messages.NoMessage")));
 			return;
 		}
 		List<PAFPlayer> friends = pPlayer.getFriends();
 		if (friends.isEmpty()) {
-			sendError(pPlayer, new TextComponent(Friends.getInstance().getPrefix() + MESSAGES.getString("Messages.NoFriends")));
+			sendError(pPlayer, new TextComponent(PREFIX + MESSAGES.getString("Messages.NoFriends")));
 			return;
 		}
 		if (uuidList != null) {
 			if (uuidList.contains(pPlayer.getUniqueId())) {
-				sendError(pPlayer, new TextComponent(Friends.getInstance().getPrefix() + MESSAGES.getString("Messages.CoolDownActive")));
+				sendError(pPlayer, new TextComponent(PREFIX + MESSAGES.getString("Messages.CoolDownActive")));
 				return;
 			}
 			if (pPlayer.hasPermission(MESSAGES.getString("CoolDown.ByPassPermission")))

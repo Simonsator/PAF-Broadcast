@@ -4,3 +4,4 @@ author: Simonsator
 depends: [PartyAndFriendsGUI]
 main: de.simonsator.partyandfriends.broadcast.gui.BroadcastSettingPlugin
 description: An add-on for party and friends to add /friend broadcast
+api-version: 1.13

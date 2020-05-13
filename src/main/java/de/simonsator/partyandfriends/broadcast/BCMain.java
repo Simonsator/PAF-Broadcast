@@ -26,22 +26,17 @@ public class BCMain extends PAFExtension {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Friends.getInstance().addCommand(new BroadcastCommand(config.getCreatedConfiguration().getStringList("Names").toArray(new String[0]),
-				config.getCreatedConfiguration().getInt("Priority"), config.getCreatedConfiguration().getString("Messages.Help"), config.getCreatedConfiguration(), this));
+		Friends.getInstance().addCommand(new BroadcastCommand(config.getStringList("Commands.Broadcast.Names"),
+				config.getInt("Commands.Broadcast.Priority"), config.getString("Messages.Help"), config.getString("Commands.Broadcast.Permission"), config, this));
 		Settings settingsCommand = (Settings) Friends.getInstance().getSubCommand(Settings.class);
 		if (settingsCommand != null)
 			if (config.getCreatedConfiguration().getBoolean("Settings.Broadcast.Enabled"))
-				settingsCommand.registerSetting(new ReceiveBroadcastSettings(config.getCreatedConfiguration().getStringList("Settings.Broadcast.Names"), config.getCreatedConfiguration().getString("Settings.Broadcast.Permission"), config.getCreatedConfiguration().getInt("Settings.Broadcast.Priority"), config.getCreatedConfiguration()));
+				settingsCommand.registerSetting(new ReceiveBroadcastSettings(config.getStringList("Settings.Broadcast.Names"), config.getString("Settings.Broadcast.Permission"), config.getCreatedConfiguration().getInt("Settings.Broadcast.Priority"), config.getCreatedConfiguration()));
 		try {
 			Class.forName("de.simonsator.partyandfriends.api.events.communication.spigot.SendSettingsDataEvent");
 			getProxy().getPluginManager().registerListener(this, new AddBroadcastGUISetting());
 		} catch (ClassNotFoundException ignored) {
 		}
 		Main.getInstance().registerExtension(this);
-	}
-
-	@Override
-	public void reload() {
-		onEnable();
 	}
 }

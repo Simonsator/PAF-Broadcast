@@ -6,7 +6,7 @@ import net.md_5.bungee.event.EventHandler;
 
 public class AddBroadcastGUISetting implements Listener {
 	@EventHandler
-	public void addClanSetting(SendSettingsDataEvent pEvent) {
+	public void addBroadcastSetting(SendSettingsDataEvent pEvent) {
 		pEvent.addSetting(30, pEvent.getPlayer().getSettingsWorth(30));
 	}
 

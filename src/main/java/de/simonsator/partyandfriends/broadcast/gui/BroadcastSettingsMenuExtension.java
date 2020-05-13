@@ -16,11 +16,13 @@ public class BroadcastSettingsMenuExtension implements Listener {
 	private final ItemStack TOP_ITEM;
 	private final ItemStack RECEIVE_ITEM;
 	private final ItemStack DO_NOT_RECEIVE_ITEM;
+	private final int PRIORITY;
 
-	public BroadcastSettingsMenuExtension(ItemStack TOP_ITEM, ItemStack pReceive, ItemStack pDoNotReceive) {
+	public BroadcastSettingsMenuExtension(ItemStack TOP_ITEM, ItemStack pReceive, ItemStack pDoNotReceive, int pPriority) {
 		this.TOP_ITEM = TOP_ITEM;
 		this.RECEIVE_ITEM = pReceive;
 		this.DO_NOT_RECEIVE_ITEM = pDoNotReceive;
+		PRIORITY = pPriority;
 	}
 
 	@EventHandler
@@ -46,7 +48,6 @@ public class BroadcastSettingsMenuExtension implements Listener {
 			default:
 				return null;
 		}
-		return new ItemPackage(TOP_ITEM, itemToAdd);
-
+		return new ItemPackage(TOP_ITEM, itemToAdd, PRIORITY);
 	}
 }

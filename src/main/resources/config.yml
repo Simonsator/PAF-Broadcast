@@ -1,6 +1,7 @@
 Settings:
   ReceiveBroadcastsSetting:
     Use: true
+    Priority: 6
     TopItem:
       ItemData: BOOK_AND_QUILL
       MetaData: 0
