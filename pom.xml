@@ -47,13 +47,13 @@
 		<dependency>
 			<groupId>de.simonsator</groupId>
 			<artifactId>Party-and-Friends-For-Bungeecord-MySQL</artifactId>
-			<version>1.0.201</version>
+			<version>1.0.212</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.md-5</groupId>
 			<artifactId>bungeecord-api</artifactId>
-			<version>1.11-SNAPSHOT</version>
+			<version>1.15-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
@@ -80,7 +80,7 @@
 		<dependency>
 			<groupId>de.simonsator</groupId>
 			<artifactId>Party-and-Friends-GUI</artifactId>
-			<version>1.0.93</version>
+			<version>1.0.103</version>
 		</dependency>
 	</dependencies>
 
