@@ -6,13 +6,9 @@ import de.simonsator.partyandfriends.utilities.ConfigurationCreator;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * @author Simonsator
- * @version 1.0.0 13.12.16
- */
 public class BCConfig extends ConfigurationCreator {
 	public BCConfig(File file, BCMain plugin) throws IOException {
-		super(file, plugin);
+		super(file, plugin, true);
 		readFile();
 		loadDefaultValues();
 		saveFile();

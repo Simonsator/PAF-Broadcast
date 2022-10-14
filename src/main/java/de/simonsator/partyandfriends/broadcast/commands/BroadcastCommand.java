@@ -14,18 +14,14 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-
-/**
- * @author Simonsator
- * @version 1.0.0 13.12.16
- */
 public class BroadcastCommand extends FriendSubCommand {
 	private final ConfigurationCreator MESSAGES;
 	private final int TIME;
 	private final BCMain PLUGIN;
 	private Set<UUID> uuidList = null;
 
-	public BroadcastCommand(List<String> pCommands, int pPriority, String pHelp, String pPermission, ConfigurationCreator pConfig, BCMain pPlugin) {
+	public BroadcastCommand(List<String> pCommands, int pPriority, String pHelp, String pPermission,
+	                        ConfigurationCreator pConfig, BCMain pPlugin) {
 		super(pCommands, pPriority, pHelp, pPermission);
 		PLUGIN = pPlugin;
 		MESSAGES = pConfig;
@@ -37,17 +33,20 @@ public class BroadcastCommand extends FriendSubCommand {
 	@Override
 	public void onCommand(final OnlinePAFPlayer pPlayer, String[] args) {
 		if (args.length < 2) {
-			sendError(pPlayer, new TextComponent(PREFIX + MESSAGES.getString("Messages.NoMessage")));
+			sendError(pPlayer, new TextComponent(TextComponent.fromLegacyText(PREFIX +
+					MESSAGES.getString("Messages.NoMessage"))));
 			return;
 		}
 		List<PAFPlayer> friends = pPlayer.getFriends();
 		if (friends.isEmpty()) {
-			sendError(pPlayer, new TextComponent(PREFIX + MESSAGES.getString("Messages.NoFriends")));
+			sendError(pPlayer, new TextComponent(TextComponent.fromLegacyText(PREFIX +
+					MESSAGES.getString("Messages.NoFriends"))));
 			return;
 		}
 		if (uuidList != null) {
 			if (uuidList.contains(pPlayer.getUniqueId())) {
-				sendError(pPlayer, new TextComponent(PREFIX + MESSAGES.getString("Messages.CoolDownActive")));
+				sendError(pPlayer, new TextComponent(TextComponent.fromLegacyText(PREFIX +
+						MESSAGES.getString("Messages.CoolDownActive"))));
 				return;
 			}
 			if (pPlayer.hasPermission(MESSAGES.getString("CoolDown.ByPassPermission")))
