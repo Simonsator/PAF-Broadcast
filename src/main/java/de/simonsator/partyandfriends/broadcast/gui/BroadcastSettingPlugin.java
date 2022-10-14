@@ -1,57 +1,80 @@
 package de.simonsator.partyandfriends.broadcast.gui;
 
-import de.simonsator.partyandfriendsgui.inventory.PAFClickManager;
-import de.simonsator.partyandfriendsgui.inventory.tasks.inventoryassignment.SettingsMenu;
+import de.simonsator.partyandfriendsgui.api.PartyFriendsAPI;
+import de.simonsator.partyandfriendsgui.api.menu.settings.GUISetting;
+import de.simonsator.partyandfriendsgui.api.menu.settings.GUISettingsManager;
 import de.simonsator.partyandfriendsgui.manager.ItemManager;
-import de.simonsator.partyandfriendsgui.utilities.Material112Converter;
-import de.simonsator.partyandfriendsgui.utilities.Material113Converter;
-import de.simonsator.partyandfriendsgui.utilities.MaterialConverter;
-import org.bukkit.Bukkit;
+import de.simonsator.partyandfriendsgui.manager.ItemManagerSetupHelper;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Objects;
 
 public class BroadcastSettingPlugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
-		getConfig().options().copyDefaults(true);
+		Configuration config = getConfig();
+		config.options().copyDefaults(true);
+		if (getServer().getBukkitVersion().contains("1.7") || getServer().getBukkitVersion().contains("1.8") ||
+				getServer().getBukkitVersion().contains("1.9") || getServer().getBukkitVersion().contains("1.10") ||
+				getServer().getBukkitVersion().contains("1.11") || getServer().getBukkitVersion().contains("1.12")) {
+			setDefaults("Settings.ReceiveBroadcastsSetting.LowerItem.SettingCurrentlyEnabledItem.ItemData",
+					"STAINED_CLAY");
+			setDefaults("Settings.ReceiveBroadcastsSetting.LowerItem.SettingCurrentlyEnabledItem.MetaData",
+					5);
+			setDefaults("Settings.ReceiveBroadcastsSetting.LowerItem.SettingCurrentlyDisabledItem.ItemData",
+					"STAINED_CLAY");
+			setDefaults("Settings.ReceiveBroadcastsSetting.LowerItem.SettingCurrentlyDisabledItem.MetaData",
+					14);
+			setDefaults("Settings.ReceiveBroadcastsSetting.TopItem.ItemData",
+					"BOOK_AND_QUILL");
+		} else {
+			setDefaults("Settings.ReceiveBroadcastsSetting.LowerItem.SettingCurrentlyEnabledItem.ItemData",
+					"GREEN_TERRACOTTA");
+			setDefaults("Settings.ReceiveBroadcastsSetting.LowerItem.SettingCurrentlyEnabledItem.MetaData",
+					0);
+			setDefaults("Settings.ReceiveBroadcastsSetting.LowerItem.SettingCurrentlyDisabledItem.ItemData",
+					"RED_TERRACOTTA");
+			setDefaults("Settings.ReceiveBroadcastsSetting.LowerItem.SettingCurrentlyDisabledItem.MetaData",
+					0);
+			setDefaults("Settings.ReceiveBroadcastsSetting.TopItem.ItemData",
+					"WRITABLE_BOOK");
+		}
 		saveConfig();
-		for (String path : getConfig().getKeys(true))
+		for (String path : config.getKeys(true))
 			if (getConfig().isString(path))
-				getConfig().set(path, ChatColor.translateAlternateColorCodes('&', getConfig().getString(path)));
+				getConfig().set(path, ChatColor.translateAlternateColorCodes('&',
+						Objects.requireNonNull(config.getString(path))));
 		if (getConfig().getBoolean("Settings.ReceiveBroadcastsSetting.Use")) {
-			ItemStack receiveItem = getGreenLoamStackWithName("Settings.ReceiveBroadcastsSetting.LowerItem.ReceiveBroadcastsItem.Text");
-			ItemStack doNotReceiveItem = getRedLoamStackWithName("Settings.ReceiveBroadcastsSetting.LowerItem.ReceiveBroadcastsItem.Text");
-			MaterialConverter materialConverter;
-			if (Bukkit.getServer().getVersion().contains("1.7") || Bukkit.getServer().getVersion().contains("1.8") || Bukkit.getServer().getVersion().contains("1.9") || Bukkit.getServer().getVersion().contains("1.10") || Bukkit.getServer().getVersion().contains("1.11") || Bukkit.getServer().getVersion().contains("1.12"))
-				materialConverter = new Material112Converter();
-			else
-				materialConverter = new Material113Converter();
-			ItemStack broadcastReceiveSettingTopItem = new ItemStack(materialConverter.getMaterial(getConfig().getString("Settings.ReceiveBroadcastsSetting.TopItem.ItemData")), 1, (short) getConfig().getInt("Settings.ReceiveBroadcastsSetting.TopItem.MetaData"));
-			ItemMeta topItemMeta = broadcastReceiveSettingTopItem.getItemMeta();
-			topItemMeta.setDisplayName(getConfig().getString("Settings.ReceiveBroadcastsSetting.TopItem.Text"));
-			broadcastReceiveSettingTopItem.setItemMeta(topItemMeta);
-			getServer().getPluginManager().registerEvents(new BroadcastSettingsMenuExtension(broadcastReceiveSettingTopItem, receiveItem, doNotReceiveItem, getConfig().getInt("Settings.ReceiveBroadcastsSetting.Priority")), this);
-			PAFClickManager.getInstance().getTask(SettingsMenu.class).addTask(new SettingItemClick(receiveItem, doNotReceiveItem));
+			ItemManagerSetupHelper setupHelper = new ItemManagerSetupHelper(config, ItemManager.getInstance().PLAYER_HEAD);
+			String itemPart = "Settings.ReceiveBroadcastsSetting.LowerItem.SettingCurrentlyEnabledItem.";
+			ItemStack receiveItem = setupHelper.getItemStack(config.getString(itemPart + "Text"),
+					itemPart + "ItemData", itemPart + "MetaData", itemPart +
+							"UseCustomTexture", itemPart + "Base64CustomTexture", itemPart +
+							"CustomModelData");
+			itemPart = "Settings.ReceiveBroadcastsSetting.LowerItem.SettingCurrentlyDisabledItem.";
+			ItemStack doNotReceiveItem = setupHelper.getItemStack(config.getString(itemPart + "Text"),
+					itemPart + "ItemData", itemPart + "MetaData", itemPart +
+							"UseCustomTexture", itemPart + "Base64CustomTexture", itemPart +
+							"CustomModelData");
+			itemPart = "Settings.ReceiveBroadcastsSetting.TopItem.";
+			ItemStack broadcastReceiveSettingTopItem =
+					setupHelper.getItemStack(getConfig().getString(itemPart + "Text"),
+							itemPart + "ItemData", itemPart + "MetaData", itemPart +
+									"UseCustomTexture", itemPart + "Base64CustomTexture", itemPart +
+									"CustomModelData");
+			GUISettingsManager.getInstance().registerSetting(new GUISetting(30,
+					broadcastReceiveSettingTopItem, new ItemStack[]{receiveItem, doNotReceiveItem},
+					getConfig().getInt("Settings.ReceiveBroadcastsSetting.Priority"),
+					getConfig().getString("Settings.ReceiveBroadcastsSetting.Permission"),
+					pPlayer -> PartyFriendsAPI.changeSetting(pPlayer, "receivebroadcast")));
 		}
 	}
 
-	private ItemStack getGreenLoamStackWithName(String pIdentifier) {
-		return setDisplayName(pIdentifier, ItemManager.getInstance().GREEN_TERRACOTTA.clone());
+	private void setDefaults(String pEntry, Object pValue) {
+		if (getConfig().get(pEntry) == null)
+			getConfig().set(pEntry, pValue);
 	}
-
-	private ItemStack getRedLoamStackWithName(String pIdentifier) {
-		return setDisplayName(pIdentifier, ItemManager.getInstance().RED_TERRACOTTA.clone());
-	}
-
-
-	private ItemStack setDisplayName(String pIdentifier, ItemStack pItemStack) {
-		ItemMeta meta = pItemStack.getItemMeta();
-		meta.setDisplayName(getConfig().getString(pIdentifier));
-		pItemStack.setItemMeta(meta);
-		return pItemStack;
-	}
-
-
 }

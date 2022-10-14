@@ -2,12 +2,29 @@ Settings:
   ReceiveBroadcastsSetting:
     Use: true
     Priority: 6
+    Permission: ''
     TopItem:
-      ItemData: BOOK_AND_QUILL
       MetaData: 0
       Text: '&6Do you want to receive broadcast messages from friends?'
+      # You can find base64 custom textures on https://minecraft-heads.com/.
+      # The website calls the base64 value just "Value"
+      UseCustomTexture: false
+      Base64CustomTexture: ''
+      CustomModelData: 0
     LowerItem:
-      ReceiveBroadcastsItem:
+      SettingCurrentlyEnabledItem:
+        # You have to enable "General.UseOwnLanguageFile" to be able to change this value
         Text: '&aYou will receive broadcast messages from friends'
-      DoNotReceiveBroadcastsItem:
+        # You can find base64 custom textures on https://minecraft-heads.com/.
+        # The website calls the base64 value just "Value"
+        UseCustomTexture: false
+        Base64CustomTexture: ''
+        CustomModelData: 0
+      SettingCurrentlyDisabledItem:
+        # You have to enable "General.UseOwnLanguageFile" to be able to change this value
         Text: '&cYou will not receive broadcast messages from friends'
+        # You can find base64 custom textures on https://minecraft-heads.com/.
+        # The website calls the base64 value just "Value"
+        UseCustomTexture: false
+        Base64CustomTexture: ''
+        CustomModelData: 0
