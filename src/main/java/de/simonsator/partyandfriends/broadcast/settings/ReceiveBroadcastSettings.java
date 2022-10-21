@@ -3,7 +3,7 @@ package de.simonsator.partyandfriends.broadcast.settings;
 import de.simonsator.partyandfriends.api.SimpleSetting;
 import de.simonsator.partyandfriends.api.pafplayers.OnlinePAFPlayer;
 import de.simonsator.partyandfriends.friends.commands.Friends;
-import net.md_5.bungee.config.Configuration;
+import de.simonsator.partyandfriends.utilities.ConfigurationCreator;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import java.util.List;
  * @version 1.0.0 26.05.17
  */
 public class ReceiveBroadcastSettings extends SimpleSetting {
-	private final Configuration CONFIG;
+	private final ConfigurationCreator CONFIG;
 
-	public ReceiveBroadcastSettings(List<String> pSettingNames, String pPermission, int pPriority, Configuration pConfiguration) {
+	public ReceiveBroadcastSettings(List<String> pSettingNames, String pPermission, int pPriority, ConfigurationCreator pConfiguration) {
 		super(pSettingNames, pPermission, pPriority, "receivebroadcast");
 		CONFIG = pConfiguration;
 	}

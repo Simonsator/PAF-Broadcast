@@ -1,18 +1,17 @@
 package de.simonsator.partyandfriends.broadcast.commands;
 
+import de.simonsator.partyandfriends.api.adapter.BukkitBungeeAdapter;
 import de.simonsator.partyandfriends.api.friends.abstractcommands.FriendSubCommand;
 import de.simonsator.partyandfriends.api.pafplayers.OnlinePAFPlayer;
 import de.simonsator.partyandfriends.api.pafplayers.PAFPlayer;
 import de.simonsator.partyandfriends.broadcast.BCMain;
 import de.simonsator.partyandfriends.utilities.ConfigurationCreator;
-import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 public class BroadcastCommand extends FriendSubCommand {
 	private final ConfigurationCreator MESSAGES;
@@ -52,11 +51,7 @@ public class BroadcastCommand extends FriendSubCommand {
 			if (pPlayer.hasPermission(MESSAGES.getString("CoolDown.ByPassPermission")))
 				return;
 			uuidList.add(pPlayer.getUniqueId());
-			ProxyServer.getInstance().getScheduler().schedule(PLUGIN, new Runnable() {
-				public void run() {
-					uuidList.remove(pPlayer.getUniqueId());
-				}
-			}, TIME, TimeUnit.SECONDS);
+			BukkitBungeeAdapter.getInstance().schedule(PLUGIN, () -> uuidList.remove(pPlayer.getUniqueId()), TIME);
 		}
 		StringBuilder builder = new StringBuilder();
 		for (int i = 1; i < args.length; i++) {
